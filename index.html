@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glamour Heaven - Premium Artificial Hair Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for elements that need more styling than Tailwind provides */
+        .wig-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-item-remove:hover {
+            color: #ef4444;
+        }
+        
+        .rating-star {
+            color: #d1d5db;
+        }
+        
+        .rating-star.active {
+            color: #f59e0b;
+        }
+        
+        #mpesa-modal {
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        #mpesa-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Animation for cart counter */
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .cart-bounce {
+            animation: bounce 0.5s;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="bg-purple-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-crown text-yellow-300 text-2xl"></i>
+                <a href="#" class="text-2xl font-bold">Glamour Heaven</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-yellow-300 transition">Home</a>
+                <a href="#products" class="hover:text-yellow-300 transition">Products</a>
+                <a href="#reviews" class="hover:text-yellow-300 transition">Reviews</a>
+                <a href="#about" class="hover:text-yellow-300 transition">About</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button id="cart-btn" class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-counter" class="absolute -top-2 -right-2 bg-yellow-400 text-purple-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                </div>
+                <button class="md:hidden" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-purple-800 px-4 py-2">
+            <a href="#home" class="block py-2 hover:text-yellow-300 transition">Home</a>
+            <a href="#products" class="block py-2 hover:text-yellow-300 transition">Products</a>
+            <a href="#reviews" class="block py-2 hover:text-yellow-300 transition">Reviews</a>
+            <a href="#about" class="block py-2 hover:text-yellow-300 transition">About</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-purple-800 to-pink-600 text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover Your Perfect Look</h1>
+                <p class="text-xl mb-6">Premium quality wigs and hair extensions that enhance your natural beauty.</p>
+                <a href="#products" class="bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-bold py-3 px-6 rounded-full transition inline-block">Shop Now</a>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Wig showcase" class="rounded-lg shadow-2xl max-w-md w-full">
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Wigs Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-purple-900">Featured Wigs</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Featured Wig 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden wig-card transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1596704017259-6d987c04fd53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Silky Straight Wig" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-yellow-400 text-purple-900 font-bold px-2 py-1 rounded text-xs">FEATURED</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Silky Straight</h3>
+                        <div class="flex mb-2">
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star"><i class="fas fa-star"></i></div>
+                            <span class="text-gray-600 text-sm ml-2">(24)</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Ultra soft, silky straight wig with natural looking part.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-900 font-bold text-xl">KSh 3,499</span>
+                            <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-full transition add-to-cart" data-id="1" data-name="Silky Straight" data-price="3499" data-image="https://images.unsplash.com/photo-1596704017259-6d987c04fd53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Wig 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden wig-card transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1591035897819-f4acdf64d4d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Curly Goddess" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-yellow-400 text-purple-900 font-bold px-2 py-1 rounded text-xs">FEATURED</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Curly Goddess</h3>
+                        <div class="flex mb-2">
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <span class="text-gray-600 text-sm ml-2">(42)</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Luscious curls with volume and bounce that lasts.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-900 font-bold text-xl">KSh 4,299</span>
+                            <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-full transition add-to-cart" data-id="2" data-name="Curly Goddess" data-price="4299" data-image="https://images.unsplash.com/photo-1591035897819-f4acdf64d4d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Wig 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden wig-card transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Kinky Afro" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-yellow-400 text-purple-900 font-bold px-2 py-1 rounded text-xs">FEATURED</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Kinky Afro</h3>
+                        <div class="flex mb-2">
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star"><i class="fas fa-star"></i></div>
+                            <span class="text-gray-600 text-sm ml-2">(18)</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Natural looking afro with perfect texture and density.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-900 font-bold text-xl">KSh 3,899</span>
+                            <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-full transition add-to-cart" data-id="3" data-name="Kinky Afro" data-price="3899" data-image="https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Products Section -->
+    <section id="products" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-purple-900">Our Wig Collection</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden wig-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Brazilian Wave" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Brazilian Wave</h3>
+                        <div class="flex mb-2">
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star"><i class="fas fa-star"></i></div>
+                            <span class="text-gray-600 text-sm ml-2">(31)</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Soft Brazilian wave with medium density for a natural look.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-900 font-bold text-xl">KSh 4,199</span>
+                            <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-full transition add-to-cart" data-id="4" data-name="Brazilian Wave" data-price="4199" data-image="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden wig-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Blonde Bob" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Blonde Bob</h3>
+                        <div class="flex mb-2">
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star"><i class="fas fa-star"></i></div>
+                            <div class="rating-star"><i class="fas fa-star"></i></div>
+                            <span class="text-gray-600 text-sm ml-2">(15)</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Trendy blonde bob wig with side-swept bangs.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-900 font-bold text-xl">KSh 3,799</span>
+                            <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-full transition add-to-cart" data-id="5" data-name="Blonde Bob" data-price="3799" data-image="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden wig-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Jet Black Straight" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Jet Black Straight</h3>
+                        <div class="flex mb-2">
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <span class="text-gray-600 text-sm ml-2">(56)</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Classic straight wig with natural shine and movement.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-900 font-bold text-xl">KSh 3,299</span>
+                            <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-full transition add-to-cart" data-id="6" data-name="Jet Black Straight" data-price="3299" data-image="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden wig-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="Ombre Curls" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Ombre Curls</h3>
+                        <div class="flex mb-2">
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star active"><i class="fas fa-star"></i></div>
+                            <div class="rating-star"><i class="fas fa-star"></i></div>
+                            <span class="text-gray-600 text-sm ml-2">(29)</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Beautiful ombre color transition with bouncy curls.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-purple-900 font-bold text-xl">KSh 4,599</span>
+                            <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-full transition add-to-cart" data-id="7" data-name="Ombre Curls" data-price="4599" data-image="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-purple-900">What Our Customers Say</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sarah K.</h4>
+                            <div class="flex">
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The Curly Goddess wig is amazing! The curls are so natural looking and the quality is top-notch. I've received so many compliments!"</p>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Grace M.</h4>
+                            <div class="flex">
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star"><i class="fas fa-star text-sm"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Fast delivery and excellent customer service. My Silky Straight wig looks just like the picture. Will definitely order again!"</p>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Customer" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Amina W.</h4>
+                            <div class="flex">
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                                <div class="rating-star active"><i class="fas fa-star text-sm"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The M-Pesa payment was so convenient and I got an SMS confirmation immediately. The Brazilian Wave wig is my new favorite!"</p>
+                </div>
+            </div>
+            
+            <!-- Leave Review Button -->
+            <div class="text-center mt-12">
+                <button id="leave-review-btn" class="bg-purple-900 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition font-semibold">Leave a Review</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 bg-purple-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h2 class="text-3xl font-bold mb-6">About Glamour Heaven</h2>
+                    <p class="mb-4">Glamour Heaven is your premier destination for high-quality artificial hair products in Kenya. We specialize in wigs that combine style, comfort, and durability.</p>
+                    <p class="mb-4">Our mission is to help you express your unique beauty with confidence. All our products are carefully selected to ensure they meet our high standards of quality.</p>
+                    <p>Shop with us today and experience the Glamour Heaven difference!</p>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1280&q=80" alt="About us" class="rounded-lg shadow-xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Glamour Heaven</h3>
+                    <p>Your trusted source for premium artificial hair products in Kenya.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-yellow-300 transition">Home</a></li>
+                        <li><a href="#products" class="hover:text-yellow-300 transition">Products</a></li>
+                        <li><a href="#reviews" class="hover:text-yellow-300 transition">Reviews</a></li>
+                        <li><a href="#about" class="hover:text-yellow-300 transition">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2"></i> +254 725673215</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@glamourheaven.co.ke</li>
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Nairobi, Kenya</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-yellow-300 transition"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/glam_oursheaven?igsh=NGFsaTV1eXZqa3Zr" class="text-2xl hover:text-yellow-300 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl hover:text-yellow-300 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-yellow-300 transition"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 Glamour Heaven. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-xl z-50 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Your Shopping Cart</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="mb-6">
+                <!-- Cart items will be dynamically inserted here -->
+                <div id="empty-cart-message" class="text-center py-8">
+                    <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">Your cart is empty</p>
+                </div>
+            </div>
+            
+            <div id="cart-summary" class="border-t border-gray-200 pt-4 hidden">
+                <div class="flex justify-between mb-2">
+                    <span class="font-semibold">Subtotal:</span>
+                    <span id="cart-subtotal">KSh 0</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="font-semibold">Delivery:</span>
+                    <span>KSh 300</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold mb-6">
+                    <span>Total:</span>
+                    <span id="cart-total">KSh 0</span>
+                </div>
+                
+                <button id="checkout-btn" class="w-full bg-purple-900 hover:bg-purple-800 text-white py-3 rounded-full transition font-semibold mb-4">
+                    Proceed to Checkout
+                </button>
+                
+                <p class="text-sm text-gray-500 text-center">We accept M-Pesa payments only</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- M-Pesa Payment Modal -->
+    <div id="mpesa-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Complete Payment via M-Pesa</h3>
+                    <button id="close-mpesa-modal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <p class="text-gray-600 mb-2">Total Amount: <span id="mpesa-amount" class="font-bold">KSh 0</span></p>
+                    <p class="text-sm text-gray-500">You will receive an M-Pesa prompt on your phone to complete payment.</p>
+                </div>
+                
+                <form id="mpesa-form">
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gray-700 font-medium mb-2">M-Pesa Phone Number</label>
+                        <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="e.g. 254712345678" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="secondary-phone" class="block text-gray-700 font-medium mb-2">Secondary Phone (Optional)</label>
+                        <input type="tel" id="secondary-phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="For order updates (optional)">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="delivery-address" class="block text-gray-700 font-medium mb-2">Delivery Address</label>
+                        <textarea id="delivery-address" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Enter your full delivery address" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full transition font-semibold flex items-center justify-center">
+                        <i class="fas fa-mobile-alt mr-2"></i> Pay with M-Pesa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6 text-center">
+                <div class="text-green-500 text-5xl mb-4">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Order Confirmed!</h3>
+                <p class="text-gray-600 mb-4">Your order #<span id="order-number">12345</span> has been received.</p>
+                <p class="text-sm text-gray-500 mb-6">You'll receive an SMS confirmation shortly. Our team will contact you for delivery details.</p>
+                
+                <div class="bg-gray-100 p-4 rounded-lg mb-6 text-left">
+                    <h4 class="font-semibold mb-2">Order Summary</h4>
+                    <div id="order-summary">
+                        <!-- Order items will be inserted here -->
+                    </div>
+                    <div class="flex justify-between font-semibold mt-2">
+                        <span>Total:</span>
+                        <span id="order-total">KSh 0</span>
+                    </div>
+                </div>
+                
+                <button id="close-confirmation-modal" class="w-full bg-purple-900 hover:bg-purple-800 text-white py-3 rounded-full transition font-semibold">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Form Modal -->
+    <div id="review-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold">Leave a Review</h3>
+                    <button id="close-review-modal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="review-form">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-medium mb-2">Your Rating</label>
+                        <div class="flex space-x-1" id="rating-stars">
+                            <div class="rating-star cursor-pointer" data-rating="1"><i class="fas fa-star text-2xl"></i></div>
+                            <div class="rating-star cursor-pointer" data-rating="2"><i class="fas fa-star text-2xl"></i></div>
+                            <div class="rating-star cursor-pointer" data-rating="3"><i class="fas fa-star text-2xl"></i></div>
+                            <div class="rating-star cursor-pointer" data-rating="4"><i class="fas fa-star text-2xl"></i></div>
+                            <div class="rating-star cursor-pointer" data-rating="5"><i class="fas fa-star text-2xl"></i></div>
+                        </div>
+                        <input type="hidden" id="selected-rating" value="0">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="review-name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                        <input type="text" id="review-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="review-product" class="block text-gray-700 font-medium mb-2">Product Reviewed</label>
+                        <select id="review-product" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <option value="">Select a product</option>
+                            <option value="Silky Straight">Silky Straight</option>
+                            <option value="Curly Goddess">Curly Goddess</option>
+                            <option value="Kinky Afro">Kinky Afro</option>
+                            <option value="Brazilian Wave">Brazilian Wave</option>
+                            <option value="Blonde Bob">Blonde Bob</option>
+                            <option value="Jet Black Straight">Jet Black Straight</option>
+                            <option value="Ombre Curls">Ombre Curls</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="review-text" class="block text-gray-700 font-medium mb-2">Your Review</label>
+                        <textarea id="review-text" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-purple-900 hover:bg-purple-800 text-white py-3 rounded-full transition font-semibold">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        const cartBtn = document.getElementById('cart-btn');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCartBtn = document.getElementById('close-cart');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const cartSummary = document.getElementById('cart-summary');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const cartTotal = document.getElementById('cart-total');
+        const cartCounter = document.getElementById('cart-counter');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        
+        // M-Pesa modal
+        const mpesaModal = document.getElementById('mpesa-modal');
+        const closeMpesaModal = document.getElementById('close-mpesa-modal');
+        const mpesaAmount = document.getElementById('mpesa-amount');
+        const mpesaForm = document.getElementById('mpesa-form');
+        
+        // Confirmation modal
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const closeConfirmationModal = document.getElementById('close-confirmation-modal');
+        const orderNumber = document.getElementById('order-number');
+        const orderSummary = document.getElementById('order-summary');
+        const orderTotal = document.getElementById('order-total');
+        
+        // Review modal
+        const reviewModal = document.getElementById('review-modal');
+        const leaveReviewBtn = document.getElementById('leave-review-btn');
+        const closeReviewModal = document.getElementById('close-review-modal');
+        const reviewForm = document.getElementById('review-form');
+        const ratingStars = document.querySelectorAll('#rating-stars .rating-star');
+        const selectedRating = document.getElementById('selected-rating');
+        
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        // Toggle mobile menu
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Initialize cart from localStorage if available
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            updateCart();
+        }
+        
+        // Add to cart functionality
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const price = parseInt(button.getAttribute('data-price'));
+                const image = button.getAttribute('data-image');
+                
+                // Check if item already in cart
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                cartCounter.classList.add('cart-bounce');
+                
+                // Remove bounce class after animation completes
+                setTimeout(() => {
+                    cartCounter.classList.remove('cart-bounce');
+                }, 500);
+                
+                // Show cart sidebar
+                cartSidebar.classList.remove('translate-x-full');
+            });
+        });
+        
+        // Update cart UI
+        function updateCart() {
+            // Save cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart counter
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCounter.textContent = totalItems;
+            
+            if (totalItems > 0) {
+                cartCounter.classList.remove('hidden');
+            } else {
+                cartCounter.classList.add('hidden');
+            }
+            
+            // Update cart items list
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                cartSummary.classList.add('hidden');
+            } else {
+                emptyCartMessage.classList.add('hidden');
+                cartSummary.classList.remove('hidden');
+                
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex items-center py-4 border-b border-gray-200';
+                    cartItem.innerHTML = `
+                        <div class="flex-shrink-0 w-16 h-16 bg-gray-200 rounded-md overflow-hidden">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h4 class="font-medium">${item.name}</h4>
+                            <p class="text-gray-600">KSh ${item.price.toLocaleString()}</p>
+                            <div class="flex items-center mt-1">
+                                <button class="quantity-decrease text-gray-500 hover:text-purple-900" data-id="${item.id}">
+                                    <i class="fas fa-minus text-xs"></i>
+                                </button>
+                                <span class="mx-2">${item.quantity}</span>
+                                <button class="quantity-increase text-gray-500 hover:text-purple-900" data-id="${item.id}">
+                                    <i class="fas fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove text-gray-400 hover:text-gray-600 ml-4" data-id="${item.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+                
+                // Calculate totals
+                const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                const total = subtotal + 300; // Add delivery fee
+                
+                cartSubtotal.textContent = `KSh ${subtotal.toLocaleString()}`;
+                cartTotal.textContent = `KSh ${total.toLocaleString()}`;
+                
+                // Add event listeners to quantity buttons
+                document.querySelectorAll('.quantity-increase').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        if (item) {
+                            item.quantity += 1;
+                            updateCart();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-decrease').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        if (item && item.quantity > 1) {
+                            item.quantity -= 1;
+                            updateCart();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.cart-item-remove').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        cart = cart.filter(item => item.id !== id);
+                        updateCart();
+                    });
+                });
+            }
+        }
+        
+        // Toggle cart sidebar
+        cartBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('translate-x-full');
+        });
+        
+        closeCartBtn.addEventListener('click', () => {
+            cartSidebar.classList.add('translate-x-full');
+        });
+        
+        // Checkout button
+        checkoutBtn.addEventListener('click', () => {
+            const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0) + 300;
+            mpesaAmount.textContent = `KSh ${total.toLocaleString()}`;
+            mpesaModal.classList.add('active');
+            cartSidebar.classList.add('translate-x-full');
+        });
+        
+        // Close M-Pesa modal
+        closeMpesaModal.addEventListener('click', () => {
+            mpesaModal.classList.remove('active');
+        });
+        
+        // M-Pesa form submission
+        mpesaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate payment processing
+            mpesaModal.classList.remove('active');
+            
+            // Generate random order number
+            const randomOrderNumber = Math.floor(10000 + Math.random() * 90000);
+            orderNumber.textContent = randomOrderNumber;
+            
+            // Build order summary
+            orderSummary.innerHTML = '';
+            cart.forEach(item => {
+                const orderItem = document.createElement('div');
+                orderItem.className = 'flex justify-between text-sm mb-1';
+                orderItem.innerHTML = `
+                    <span>${item.name} x${item.quantity}</span>
+                    <span>KSh ${(item.price * item.quantity).toLocaleString()}</span>
+                `;
+                orderSummary.appendChild(orderItem);
+            });
+            
+            // Add delivery fee
+            const deliveryItem = document.createElement('div');
+            deliveryItem.className = 'flex justify-between text-sm mb-1';
+            deliveryItem.innerHTML = `
+                <span>Delivery</span>
+                <span>KSh 300</span>
+            `;
+            orderSummary.appendChild(deliveryItem);
+            
+            // Set total
+            const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0) + 300;
+            orderTotal.textContent = `KSh ${total.toLocaleString()}`;
+            
+            // Show confirmation modal
+            confirmationModal.classList.remove('hidden');
+            
+            // Clear cart
+            cart = [];
+            updateCart();
+            
+            // In a real implementation, you would send this data to your server
+            // to process the M-Pesa payment via Daraja API
+            const phone = document.getElementById('phone').value;
+            const secondaryPhone = document.getElementById('secondary-phone').value;
+            const address = document.getElementById('delivery-address').value;
+            
+            console.log('Payment processed for:', {
+                orderNumber: randomOrderNumber,
+                phone,
+                secondaryPhone,
+                address,
+                items: cart,
+                total
+            });
+            
+            // Reset form
+            mpesaForm.reset();
+        });
+        
+        // Close confirmation modal
+        closeConfirmationModal.addEventListener('click', () => {
+            confirmationModal.classList.add('hidden');
+        });
+        
+        // Review modal functionality
+        leaveReviewBtn.addEventListener('click', () => {
+            reviewModal.classList.remove('hidden');
+        });
+        
+        closeReviewModal.addEventListener('click', () => {
+            reviewModal.classList.add('hidden');
+        });
+        
+        // Rating stars
+        ratingStars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.getAttribute('data-rating'));
+                selectedRating.value = rating;
+                
+                // Update star display
+                ratingStars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Review form submission
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('review-name').value;
+            const product = document.getElementById('review-product').value;
+            const text = document.getElementById('review-text').value;
+            const rating = selectedRating.value;
+            
+            // In a real implementation, you would send this data to your server
+            console.log('Review submitted:', {
+                name,
+                product,
+                rating,
+                text
+            });
+            
+            // Show success message
+            alert('Thank you for your review!');
+            
+            // Reset form and close modal
+            reviewForm.reset();
+            selectedRating.value = 0;
+            ratingStars.forEach(star => star.classList.remove('active'));
+            reviewModal.classList.add('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
